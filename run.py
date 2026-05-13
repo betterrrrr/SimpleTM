@@ -86,7 +86,7 @@ if __name__ == '__main__':
     parser.add_argument('--wv', type=str, default='db1', help='Wavelet filter type. Supports all wavelets available in PyTorch Wavelets')
     parser.add_argument('--m', type=int, default=3, help='Number of levels for the stationary wavelet transform')
     parser.add_argument('--kernel_size', default=None, help='Specify the length of randomly initialized wavelets (if not None)')
-    parser.add_argument('--alpha', type=float, default=1, help='Weight of the inner product score in geometric attention')
+    parser.add_argument('--alpha', type=float, default=1, help='Initial outer-product weight in geometric attention (inner/outer mixing becomes learnable during training)')
     parser.add_argument('--l1_weight', type=float, default=5e-5, help='Weight of L1 loss')
     parser.add_argument('--d_model', type=int, default=32, help='Dimensionality of pseudo tokens')
     parser.add_argument('--d_ff', type=int, default=32, help='Dimensionality of the feedforward network')

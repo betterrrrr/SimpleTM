@@ -138,8 +138,27 @@ class GeomAttention(nn.Module):
         self.mask_flag = mask_flag
         self.output_attention = output_attention
         self.dropout = nn.Dropout(attention_dropout)
-        
-        self.alpha = alpha 
+
+        alpha = float(alpha)
+        alpha = max(0.0, min(1.0, alpha))
+        init_inner_weight = max(1.0 - alpha, 1e-6)
+        init_outer_weight = max(alpha, 1e-6)
+        self.io_mix_logits = nn.Parameter(
+            torch.log(torch.tensor([init_inner_weight, init_outer_weight], dtype=torch.float32))
+        )
+
+    def _load_from_state_dict(self, state_dict, prefix, local_metadata, strict,
+                              missing_keys, unexpected_keys, error_msgs):
+        super()._load_from_state_dict(
+            state_dict, prefix, local_metadata, strict,
+            missing_keys, unexpected_keys, error_msgs
+        )
+        missing_key = prefix + 'io_mix_logits'
+        if missing_key in missing_keys:
+            missing_keys.remove(missing_key)
+
+    def get_io_weights(self):
+        return torch.softmax(self.io_mix_logits, dim=0)
 
     def forward(self, queries, keys, values, attn_mask=None):
         B, L, H, E = queries.shape
@@ -156,7 +175,8 @@ class GeomAttention(nn.Module):
         wedge_norm2 = F.relu(wedge_norm2)
         wedge_norm = torch.sqrt(wedge_norm2 + 1e-8)
 
-        scores = (1 - self.alpha) * dot_product + self.alpha * wedge_norm
+        io_weights = self.get_io_weights().to(dot_product.dtype)
+        scores = io_weights[0] * dot_product + io_weights[1] * wedge_norm
         scores = scores * scale
 
         if self.mask_flag:
