@@ -69,24 +69,24 @@ python -u run.py \
   --model "$model_name" \
   --data ETTm2 \
   --features M \
-  --seq_len 96 \
-  --pred_len 336 \
+  --seq_len 360 \
+  --pred_len 96 \
   --e_layers 1 \
-  --d_model 64 \
-  --d_ff 64 \
+  --d_model 32 \
+  --d_ff 32 \
   --learning_rate 0.006\
-  --batch_size 128 \
+  --batch_size 256 \
   --fix_seed 2025 \
   --use_norm 1 \
-  --wv "bior3.3" \
-  --m 1 \
+  --wv "bior3.1" \
+  --m 3 \
   --enc_in 7 \
   --dec_in 7 \
   --c_out 7 \
   --des 'Exp' \
   --itr 3 \
-  --alpha 0.6 \
-  --l1_weight 5e-5
+  --alpha 0.3 \
+  --l1_weight 0.0005
 
 python -u run.py \
   --is_training 1 \
@@ -98,21 +98,80 @@ python -u run.py \
   --model "$model_name" \
   --data ETTm2 \
   --features M \
-  --seq_len 96 \
-  --pred_len 720 \
+  --seq_len 360 \
+  --pred_len 192 \
   --e_layers 1 \
-  --d_model 96 \
-  --d_ff 96 \
-  --learning_rate 0.003\
+  --d_model 32 \
+  --d_ff 32 \
+  --learning_rate 0.006\
   --batch_size 256 \
   --fix_seed 2025 \
   --use_norm 1 \
-  --wv "db1" \
+  --wv "bior3.1" \
+  --m 1 \
+  --enc_in 7 \
+  --dec_in 7 \
+  --c_out 7 \
+  --des 'Exp' \
+  --itr 3 \
+  --alpha 0.0 \
+  --l1_weight 0.005
+
+python -u run.py \
+  --is_training 1 \
+  --lradj 'TST' \
+  --patience 3 \
+  --root_path ./dataset/ETT-small/ \
+  --data_path ETTm2.csv \
+  --model_id ETTm2 \
+  --model "$model_name" \
+  --data ETTm2 \
+  --features M \
+  --seq_len 720 \
+  --pred_len 96 \
+  --e_layers 1 \
+  --d_model 32 \
+  --d_ff 32 \
+  --learning_rate 0.006\
+  --batch_size 256 \
+  --fix_seed 2025 \
+  --use_norm 1 \
+  --wv "bior3.1" \
   --m 3 \
   --enc_in 7 \
   --dec_in 7 \
   --c_out 7 \
   --des 'Exp' \
   --itr 3 \
-  --alpha 1.0 \
-  --l1_weight 0.0
+  --alpha 0.3 \
+  --l1_weight 0.0005
+
+python -u run.py \
+  --is_training 1 \
+  --lradj 'TST' \
+  --patience 3 \
+  --root_path ./dataset/ETT-small/ \
+  --data_path ETTm2.csv \
+  --model_id ETTm2 \
+  --model "$model_name" \
+  --data ETTm2 \
+  --features M \
+  --seq_len 720 \
+  --pred_len 192 \
+  --e_layers 1 \
+  --d_model 32 \
+  --d_ff 32 \
+  --learning_rate 0.006\
+  --batch_size 256 \
+  --fix_seed 2025 \
+  --use_norm 1 \
+  --wv "bior3.1" \
+  --m 1 \
+  --enc_in 7 \
+  --dec_in 7 \
+  --c_out 7 \
+  --des 'Exp' \
+  --itr 3 \
+  --alpha 0.0 \
+  --l1_weight 0.005
+

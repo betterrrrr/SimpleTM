@@ -1,2 +1,10 @@
 __pycache__/
 *.py[cod]
+
+dataset/
+.cache/
+results/
+checkpoints/
+*.txt
+*.sh
+Test.md

@@ -69,8 +69,37 @@ python -u run.py \
   --model "$model_name" \
   --data custom \
   --features M \
-  --seq_len 96 \
-  --pred_len 336 \
+  --seq_len 360 \
+  --pred_len 96 \
+  --e_layers 2 \
+  --d_model 512 \
+  --d_ff 1024 \
+  --learning_rate 0.003 \
+  --batch_size 24 \
+  --fix_seed 2025 \
+  --use_norm 1 \
+  --wv "db1" \
+  --m 3 \
+  --enc_in 862 \
+  --dec_in 862 \
+  --c_out 862 \
+  --des 'Exp' \
+  --itr 1 \
+  --alpha 0.1\
+  --l1_weight 0.0 \
+
+python -u run.py \
+  --is_training 1 \
+  --lradj 'TST' \
+  --patience 3 \
+  --root_path ./dataset/traffic/ \
+  --data_path traffic.csv \
+  --model_id Traffic \
+  --model "$model_name" \
+  --data custom \
+  --features M \
+  --seq_len 360 \
+  --pred_len 192 \
   --e_layers 1 \
   --d_model 1024 \
   --d_ff 2048 \
@@ -88,7 +117,7 @@ python -u run.py \
   --alpha 0.1\
   --l1_weight 0.0 \
 
-ppython -u run.py \
+python -u run.py \
   --is_training 1 \
   --lradj 'TST' \
   --patience 3 \
@@ -98,8 +127,37 @@ ppython -u run.py \
   --model "$model_name" \
   --data custom \
   --features M \
-  --seq_len 96 \
-  --pred_len 720 \
+  --seq_len 720 \
+  --pred_len 96 \
+  --e_layers 2 \
+  --d_model 512 \
+  --d_ff 1024 \
+  --learning_rate 0.003 \
+  --batch_size 24 \
+  --fix_seed 2025 \
+  --use_norm 1 \
+  --wv "db1" \
+  --m 3 \
+  --enc_in 862 \
+  --dec_in 862 \
+  --c_out 862 \
+  --des 'Exp' \
+  --itr 1 \
+  --alpha 0.1\
+  --l1_weight 0.0 \
+
+python -u run.py \
+  --is_training 1 \
+  --lradj 'TST' \
+  --patience 3 \
+  --root_path ./dataset/traffic/ \
+  --data_path traffic.csv \
+  --model_id Traffic \
+  --model "$model_name" \
+  --data custom \
+  --features M \
+  --seq_len 720 \
+  --pred_len 192 \
   --e_layers 1 \
   --d_model 1024 \
   --d_ff 2048 \
@@ -116,3 +174,4 @@ ppython -u run.py \
   --itr 1 \
   --alpha 0.1\
   --l1_weight 0.0 \
+
