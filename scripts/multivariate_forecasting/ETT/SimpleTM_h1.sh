@@ -70,7 +70,7 @@ python3 -u run.py \
   --c_out 7 \
   --des Exp \
   --itr 3 \
-  --alpha 1.0 \
+    --alpha 0.3 \
   --l1_weight 5e-05
 
 
@@ -130,7 +130,7 @@ python3 -u run.py \
   --c_out 7 \
   --des Exp \
   --itr 3 \
-  --alpha 1.0 \
+    --alpha 0.3 \
   --l1_weight 5e-05
 
 
@@ -190,7 +190,7 @@ python3 -u run.py \
   --c_out 7 \
   --des Exp \
   --itr 3 \
-  --alpha 1.0 \
+    --alpha 0.3 \
   --l1_weight 5e-05
 
 

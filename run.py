@@ -44,7 +44,7 @@ if __name__ == '__main__':
                         help='whether to use distilling in encoder, using this argument means not using distilling',
                         default=True)
     parser.add_argument('--dropout', type=float, default=0.1, help='dropout')
-    parser.add_argument('--geomattn_dropout', type=float, default=0.5, help='dropout rate of the projection layer in the geometric attention')
+    parser.add_argument('--geomattn_dropout', type=float, default=0.3, help='dropout rate of the projection layer in the geometric attention')
     parser.add_argument('--embed', type=str, default='timeF',
                         help='time features encoding, options:[timeF, fixed, learned]')
     parser.add_argument('--activation', type=str, default='gelu', help='activation')
@@ -86,7 +86,8 @@ if __name__ == '__main__':
     parser.add_argument('--wv', type=str, default='db1', help='Wavelet filter type. Supports all wavelets available in PyTorch Wavelets')
     parser.add_argument('--m', type=int, default=3, help='Number of levels for the stationary wavelet transform')
     parser.add_argument('--kernel_size', default=None, help='Specify the length of randomly initialized wavelets (if not None)')
-    parser.add_argument('--alpha', type=float, default=1, help='Initial outer-product weight in geometric attention (inner/outer mixing becomes learnable during training)')
+    parser.add_argument('--alpha', type=float, default=0.3, help='Initial outer-product weight in geometric attention (inner/outer mixing becomes learnable during training)')
+    parser.add_argument('--io_mix_lr_scale', type=float, default=5.0, help='Learning-rate multiplier for the learnable inner/outer mixing logits')
     parser.add_argument('--l1_weight', type=float, default=5e-5, help='Weight of L1 loss')
     parser.add_argument('--d_model', type=int, default=32, help='Dimensionality of pseudo tokens')
     parser.add_argument('--d_ff', type=int, default=32, help='Dimensionality of the feedforward network')

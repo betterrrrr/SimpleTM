@@ -33,7 +33,30 @@ class Exp_Long_Term_Forecast(Exp_Basic):
         return data_set, data_loader
 
     def _select_optimizer(self):
-        model_optim = optim.AdamW(self.model.parameters(), lr=self.args.learning_rate)
+        mix_params = []
+        base_params = []
+
+        for name, param in self.model.named_parameters():
+            if not param.requires_grad:
+                continue
+            if name.endswith('io_mix_logits'):
+                mix_params.append(param)
+            else:
+                base_params.append(param)
+
+        param_groups = [{
+            'params': base_params,
+            'lr': self.args.learning_rate,
+        }]
+
+        if mix_params:
+            param_groups.append({
+                'params': mix_params,
+                'lr': self.args.learning_rate * self.args.io_mix_lr_scale,
+                'weight_decay': 0.0,
+            })
+
+        model_optim = optim.AdamW(param_groups, lr=self.args.learning_rate)
         return model_optim
 
     def _select_criterion(self):
